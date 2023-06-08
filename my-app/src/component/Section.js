@@ -12,7 +12,7 @@ const Section = ({
   isOdd = false,
   forwardRef,
 }) => (
-  <section ref={forwardRef} className={`${sectionCssClasses} ${isOdd ? 'bg-gray-50' : ''}`} id={id}>
+  <section ref={forwardRef} className={`${sectionCssClasses} ${isOdd ? '' : 'bg-gray-50'}`} id={id}>
     <h3>{title}</h3>
   </section>
 )
