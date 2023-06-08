@@ -1,31 +1,28 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import './App.css';
 import Section from './component/Section';
 import RootLayout from './layout/RootLayout';
+import { navBarItems } from './data/navBar';
 
 function App() {
-  const homeRef = React.createRef()
-  const aboutUsRef = React.createRef()
-  const contactRef = React.createRef()
-  const socialRef = React.createRef()
-  const feedbackRef = React.createRef()
-
   const refMapping = useMemo(
-    () => ({
-      "app-home": homeRef,
-      "app-about-us": aboutUsRef,
-      "app-contact": contactRef,
-      "app-social": socialRef,
-      "app-feedback": feedbackRef,
-    }),
-    [aboutUsRef, contactRef, feedbackRef, homeRef, socialRef],
+    () => navBarItems.reduce(
+      (acc, item) => {
+        return {
+          ...acc,
+          [item.id]: React.createRef(),
+        }
+      },
+      {},
+    ),
+    [],
   )
 
   const onNavClick = useCallback(
     (id) => {
       const ref = refMapping[id]
       if (ref) {
-        ref.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+        ref.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
       }
     },
     [refMapping],
@@ -33,11 +30,15 @@ function App() {
 
   return (
     <RootLayout onNavClick={onNavClick}>
-      <Section id="app-home" title='Home' ref={homeRef} />
-      <Section id="app-about-us" title="About Us" isOdd ref={aboutUsRef} />
-      <Section id="app-contact" title="Contact" ref={contactRef} />
-      <Section id="app-social" title="Social" isOdd ref={socialRef} />
-      <Section id="app-feedback" title="Feedback" ref={feedbackRef} />
+      {navBarItems.map((item, index) => (
+        <Section
+          key={item.id}
+          id={item.id}
+          title={item.name}
+          ref={refMapping[item.id]}
+          isOdd={index % 2 !== 0}
+        />
+      ))}
     </RootLayout>
   );
 }

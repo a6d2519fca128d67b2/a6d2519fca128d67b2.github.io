@@ -1,5 +1,10 @@
 import React from 'react'
-import './Section.css'
+
+const sectionCssClasses = `
+  min-h-screen
+  flex justify-evenly items-center
+  text-sky-950
+`
 
 const Section = ({
   id="app-section",
@@ -7,7 +12,7 @@ const Section = ({
   isOdd = false,
   forwardRef,
 }) => (
-  <section ref={forwardRef} className={`app-section ${isOdd ? 'odd' : ''}`} id={id}>
+  <section ref={forwardRef} className={`${sectionCssClasses} ${isOdd ? 'bg-gray-50' : ''}`} id={id}>
     <h3>{title}</h3>
   </section>
 )
