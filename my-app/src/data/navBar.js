@@ -4,8 +4,8 @@ export const navBarItems = [
     name: 'Home',
   },
   {
-    id: 'about-us',
-    name: 'About Us',
+    id: 'about-me',
+    name: 'About Me',
   },
   {
     id: 'app-contact',

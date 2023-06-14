@@ -1,6 +1,6 @@
-import { useState } from "react"
-import * as IoIcons from "react-icons/io"
-import { socialItems } from "../data/social"
+import React, { useState } from 'react'
+import * as IoIcons from 'react-icons/io'
+import { socialItems } from '../data/social'
 
 const socialIconCssClasses = `
   flex justify-center items-center
@@ -23,11 +23,12 @@ const SocialIcon = ({ Icon, color }) => {
   )
 }
 
-const Footer = () => {
+const Footer = ({ forwardRef }) => {
   return (
-    <footer className="p-6 flex justify-center items-center text-sky-950">
+    <footer className="container mx-auto p-6 flex justify-end items-end text-sky-950">
       {socialItems.map((item) => (
         <SocialIcon
+          key={item.id}
           Icon={IoIcons[item.icon]}
           color={item.color}
         />
