@@ -1,19 +1,30 @@
 import React from 'react'
+import AboutMe from './AboutMe';
+import SectionTitle from './SectionTitle';
+import Home from './Home';
 
 const sectionCssClasses = `
-  flex justify-evenly items-center
+  flex justify-center items-center
   text-sky-950
 `
 
-const Section = ({
+const SectionContentMapping = {
+  'about-me': AboutMe,
+  'app-home': Home,
+};
+
+const SectionWrapper = ({
   id="app-section",
   title = 'App Section',
-  isOdd = false,
   forwardRef,
-}) => (
-  <section ref={forwardRef} className={`${sectionCssClasses} ${isOdd ? '' : 'bg-gray-50'}`} id={id}>
-    <p className='text-5xl'>{title}</p>
-  </section>
-)
+}) => {
+  const Section = SectionContentMapping[id] || SectionTitle
 
-export default React.forwardRef((props, ref) => <Section {...props} forwardRef={ref} />)
+  return (
+    <div ref={forwardRef} className={sectionCssClasses} id={id}>
+      {!!Section && <Section title={title} />}
+    </div>
+  )
+}
+
+export default React.forwardRef((props, ref) => <SectionWrapper {...props} forwardRef={ref} />)

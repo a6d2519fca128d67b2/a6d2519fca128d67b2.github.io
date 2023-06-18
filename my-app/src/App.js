@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react';
-import './App.css';
 import Section from './component/Section';
 import RootLayout from './layout/RootLayout';
 import { navBarItems } from './data/navBar';
